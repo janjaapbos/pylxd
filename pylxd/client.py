@@ -453,12 +453,7 @@ class Client:
                     if os.path.exists(remote_cert_path):
                         verify = remote_cert_path
         else:
-            if "LXD_DIR" in os.environ:
-                path = os.path.join(os.environ.get("LXD_DIR"), "unix.socket")
-            elif os.path.exists("/var/snap/lxd/common/lxd/unix.socket"):
-                path = "/var/snap/lxd/common/lxd/unix.socket"
-            else:
-                path = "/var/lib/lxd/unix.socket"
+            path = "/var/lib/incus/unix.socket"
             endpoint = f"http+unix://{parse.quote(path, safe='')}"
         self.cert = cert
         if session is None:
