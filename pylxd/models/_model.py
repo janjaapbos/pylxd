@@ -226,7 +226,7 @@ class Model(metaclass=ModelType):
         """Reset the object from the server."""
         return self.sync(rollback=True)
 
-    def save(self, wait=False):
+    def save(self, wait=True):
         """Save data to the server.
 
         This method should write the new data to the server via marshalling.
@@ -240,7 +240,7 @@ class Model(metaclass=ModelType):
             self.client.operations.wait_for_operation(response.json()["operation"])
         self.__dirty__.clear()
 
-    def delete(self, wait=False):
+    def delete(self, wait=True):
         """Delete an object from the server."""
         response = self.api.delete()
 
