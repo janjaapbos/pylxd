@@ -264,7 +264,7 @@ class Model(metaclass=ModelType):
                     marshalled[key] = val
         return marshalled
 
-    def post(self, json=None, wait=False):
+    def post(self, json=None, wait=True):
         """Access the POST method directly for the object.
 
         :param wait: If wait is True, then wait here until the operation
@@ -278,7 +278,7 @@ class Model(metaclass=ModelType):
         if response.json()["type"] == "async" and wait:
             self.client.operations.wait_for_operation(response.json()["operation"])
 
-    def put(self, put_object, wait=False):
+    def put(self, put_object, wait=True):
         """Access the PUT method directly for the object.
 
         This is to bypass the `save` method, and introduce a slightly saner
@@ -303,7 +303,7 @@ class Model(metaclass=ModelType):
         self.raw_put(put_object, wait)
         self.sync(rollback=True)
 
-    def raw_put(self, put_object, wait=False):
+    def raw_put(self, put_object, wait=True):
         """Access the PUT method on the object direct, but with NO sync back.
 
         This accesses the PUT method for the object, but uses the `put_object`
@@ -323,7 +323,7 @@ class Model(metaclass=ModelType):
         if response.json()["type"] == "async" and wait:
             self.client.operations.wait_for_operation(response.json()["operation"])
 
-    def patch(self, patch_object, wait=False):
+    def patch(self, patch_object, wait=True):
         """Access the PATCH method directly for the object.
 
         This is to bypass the `save` method, and introduce a slightly saner
@@ -348,7 +348,7 @@ class Model(metaclass=ModelType):
         self.raw_patch(patch_object, wait)
         self.sync(rollback=True)
 
-    def raw_patch(self, patch_object, wait=False):
+    def raw_patch(self, patch_object, wait=True):
         """Access the PATCH method on the object direct, but with NO sync back.
 
         This accesses the PATCH method for the object, but uses the
