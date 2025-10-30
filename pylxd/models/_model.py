@@ -240,7 +240,7 @@ class Model(metaclass=ModelType):
             self.client.operations.wait_for_operation(response.json()["operation"])
         self.__dirty__.clear()
 
-    def delete(self, wait=True):
+    def delete(self, wait=False):
         """Delete an object from the server."""
         response = self.api.delete()
 
